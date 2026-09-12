@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "author": "Jonathan Hernández Lazcano",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": -70.35,
+      "left": -140.4,
+      "attrs": { "env": "micropython-20260406-v1.28.0" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -32.4,
+      "left": 71,
+      "attrs": { "color": "magenta" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": -99.6,
+      "left": 23,
+      "attrs": { "color": "orange" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 23.15,
+      "left": 9.6,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -44.05,
+      "left": -28.8,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 275,
+      "left": 67.2,
+      "attrs": { "color": "green", "xray": "1" }
+    }
+  ],
+  "connections": [
+    [ "led1:C", "r1:2", "green", [ "v0" ] ],
+    [ "led2:C", "r2:2", "green", [ "v0" ] ],
+    [ "r2:1", "pico:GND.8", "black", [ "v0" ] ],
+    [ "r1:1", "r2:1", "black", [ "v0", "h-57.6" ] ],
+    [ "led2:A", "pico:GP15", "orange", [ "v0", "h105.6", "v297.6", "h-278.4" ] ],
+    [ "led1:A", "pico:GP14", "magenta", [ "v211.2", "h-259.2", "v-105.6" ] ],
+    [ "btn1:2.l", "pico:GND.4", "black", [ "h-288", "v-9.4" ] ],
+    [ "btn1:1.l", "pico:GP16", "blue", [ "h-134.4" ] ]
+  ],
+  "dependencies": {}
+}
