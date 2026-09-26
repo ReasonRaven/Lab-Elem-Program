@@ -132,7 +132,7 @@ def change_direction(new_dir, current_speed):
 
 ## 7. Funcionamiento del programa
 
-En `main.py`, la variable `MODO` selecciona el comportamiento:
+En `PWM_AUTO.py`, y `PWM_MANUAL` la variable `MODO` selecciona el comportamiento:
 
 ### MODO = "AUTO" (reto base, CHALLENGE 06)
 
@@ -156,20 +156,16 @@ En `main.py`, la variable `MODO` selecciona el comportamiento:
 
 ## 8. Plan de pruebas
 
-> Marca cada prueba con PASS o FAIL después de probarla.
-
-| # | Test | Resultado esperado | Wokwi | Físico |
-|---|---|---|---|---|
-| 1 | STOP | Motor detenido | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 2 | FORWARD | Giro en sentido correcto | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 3 | REVERSE | Giro en sentido contrario | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 4 | 25 / 50 / 75 / 100 % | La velocidad cambia en cada nivel | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 5 | Ramp UP | Incremento progresivo 0 → 100 % | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 6 | Ramp DOWN | Reducción progresiva 100 → 0 % | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| 7 | Cambio de dirección | Primero pasa por 0 % y luego invierte | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-| B | Bonus: botones + potenciómetro | Control manual con rampa y cambio seguro | ☐ PASS / ☐ FAIL | ☐ PASS / ☐ FAIL |
-
-La validación en Wokwi es evidencia de la **lógica**. La prueba física es evidencia de la **implementación**.
+| # | Test | Resultado esperado |
+|---|---|---|
+| 1 | STOP | Motor detenido |
+| 2 | FORWARD | Giro en sentido correcto |
+| 3 | REVERSE | Giro en sentido contrario |
+| 4 | 25 / 50 / 75 / 100 % | La velocidad cambia en cada nivel |
+| 5 | Ramp UP | Incremento progresivo 0 → 100 % |
+| 6 | Ramp DOWN | Reducción progresiva 100 → 0 % |
+| 7 | Cambio de dirección | Primero pasa por 0 % y luego invierte |
+| B | Bonus: botones + potenciómetro | Control manual con rampa y cambio seguro |
 
 ---
 
