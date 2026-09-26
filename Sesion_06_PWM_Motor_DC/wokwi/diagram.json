@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "author": "Laboratorio de Elementos Programables I",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 20,
+      "left": -140,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "chip-l298n",
+      "id": "bridge",
+      "top": -55,
+      "left": 150,
+      "attrs": {
+        "Vs": "6"
+      }
+    },
+    {
+      "type": "chip-stepper-esc",
+      "id": "esc",
+      "top": -40,
+      "left": 390,
+      "attrs": {
+        "Tau": "10",
+        "Texp": "-2",
+        "MaxSpeed": "180"
+      }
+    },
+    {
+      "type": "wokwi-stepper-motor",
+      "id": "motor",
+      "top": -30,
+      "left": 620,
+      "attrs": {
+        "size": "17",
+        "display": "angle",
+        "arrow": "orange"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "fwd",
+      "top": 260,
+      "left": 60,
+      "attrs": {
+        "label": "FORWARD",
+        "color": "green",
+        "key": "F",
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "rev",
+      "top": 260,
+      "left": 180,
+      "attrs": {
+        "label": "REVERSE",
+        "color": "blue",
+        "key": "R",
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "stop",
+      "top": 260,
+      "left": 300,
+      "attrs": {
+        "label": "STOP",
+        "color": "red",
+        "key": "S",
+        "bounce": "0"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot",
+      "top": 245,
+      "left": 465,
+      "attrs": {
+        "value": "700"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "pico:GP2",
+      "bridge:IN1",
+      "green",
+      []
+    ],
+    [
+      "pico:GP3",
+      "bridge:IN2",
+      "blue",
+      []
+    ],
+    [
+      "pico:GP4",
+      "bridge:EN A",
+      "orange",
+      []
+    ],
+    [
+      "pico:GND.2",
+      "bridge:GND",
+      "black",
+      []
+    ],
+    [
+      "bridge:OUT1",
+      "esc:INA",
+      "green",
+      []
+    ],
+    [
+      "bridge:OUT2",
+      "esc:INB",
+      "blue",
+      []
+    ],
+    [
+      "pico:3V3",
+      "esc:VMOT",
+      "red",
+      []
+    ],
+    [
+      "pico:GND.3",
+      "esc:GND",
+      "black",
+      []
+    ],
+    [
+      "esc:A-",
+      "motor:A-",
+      "#8f4814",
+      []
+    ],
+    [
+      "esc:A+",
+      "motor:A+",
+      "#8f4814",
+      []
+    ],
+    [
+      "esc:B+",
+      "motor:B+",
+      "#8f4814",
+      []
+    ],
+    [
+      "esc:B-",
+      "motor:B-",
+      "#8f4814",
+      []
+    ],
+    [
+      "pico:GP14",
+      "fwd:1.l",
+      "green",
+      []
+    ],
+    [
+      "fwd:2.l",
+      "pico:GND.4",
+      "black",
+      []
+    ],
+    [
+      "pico:GP15",
+      "rev:1.l",
+      "blue",
+      []
+    ],
+    [
+      "rev:2.l",
+      "pico:GND.4",
+      "black",
+      []
+    ],
+    [
+      "pico:GP16",
+      "stop:1.l",
+      "red",
+      []
+    ],
+    [
+      "stop:2.l",
+      "pico:GND.4",
+      "black",
+      []
+    ],
+    [
+      "pot:SIG",
+      "pico:GP26",
+      "purple",
+      []
+    ],
+    [
+      "pot:VCC",
+      "pico:3V3",
+      "red",
+      []
+    ],
+    [
+      "pot:GND",
+      "pico:GND.6",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {
+    "chip-l298n": "github:drf5n/Wokwi-Chip-L298N@1.0.5",
+    "chip-stepper-esc": "github:drf5n/Wokwi-Chip-stepper-esc@1.0.0"
+  }
+}
