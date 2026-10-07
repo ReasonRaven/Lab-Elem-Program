@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "author": "Jonathan Hernández Lazcano",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": { "env": "micropython-20260406-v1.28.0" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 13.55,
+      "left": 124.8,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -51.6,
+      "left": 224.6,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 90.35,
+      "left": 134.4,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 25.2,
+      "left": 234.2,
+      "attrs": { "color": "yellow" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 176.75,
+      "left": 144,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 111.6,
+      "left": 243.8,
+      "attrs": { "color": "red" }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 181.1, "left": 355, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr1", "top": 406.4, "left": 0.8, "attrs": {} },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr2",
+      "top": 291.2,
+      "left": -95.2,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "led1:C", "r1:2", "green", [ "v0" ] ],
+    [ "led2:C", "r2:2", "green", [ "v0" ] ],
+    [ "led3:C", "r3:2", "green", [ "v0" ] ],
+    [ "led1:A", "pico:GP13", "green", [ "v9.6", "h-144", "v220.8", "h-96" ] ],
+    [ "r1:1", "pico:GND.8", "black", [ "v0" ] ],
+    [ "r2:1", "pico:GND.8", "black", [ "v0" ] ],
+    [ "r3:1", "pico:GND.8", "black", [ "v0" ] ],
+    [ "led2:A", "pico:GP14", "gold", [ "v38.4", "h-134.4", "v134.4", "h-153.6", "v-48" ] ],
+    [ "led3:A", "pico:GP15", "red", [ "v124.8", "h-278.4", "v-86.4" ] ],
+    [ "pot1:GND", "pico:GND.4", "black", [ "v76.8", "h-326.4", "v-9.6", "h-115.2", "v-144" ] ],
+    [ "pot1:SIG", "pico:GP26", "violet", [ "v-144", "h-0.4" ] ],
+    [ "pot1:VCC", "pico:3V3", "red", [ "v-182.4", "h-0.8" ] ],
+    [ "ldr1:VCC", "pico:3V3", "red", [] ],
+    [ "ldr1:GND", "pico:GND.7", "black", [] ],
+    [ "ldr1:AO", "pico:GP27", "orange", [] ]
+  ],
+  "dependencies": {}
+}
