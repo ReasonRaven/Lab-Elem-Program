@@ -270,6 +270,11 @@ Sesion_07_ADC_Signal_Conditioning/
 
 ![Hardware](evidence/hardware_photo.jpg)
 
+**Videos del funcionamiento:**
+
+- Video 1: https://youtu.be/J37xOQ16ij0
+- Video 2: https://youtu.be/Iyk5rGFSr8M
+
 Evidencia adicional: [estabilización del filtro](evidence/serial_filter_settling.png) · [estado de LEDs en serial](evidence/serial_led_state.png) · [vista superior](evidence/hardware_photo_top.jpg) · [vista lateral](evidence/hardware_photo_side.jpg)
 
 ## Referencias
