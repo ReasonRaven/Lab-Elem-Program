@@ -277,9 +277,3 @@ Sesion_07_ADC_Signal_Conditioning/
 
 Evidencia adicional: [estabilización del filtro](evidence/serial_filter_settling.png) · [estado de LEDs en serial](evidence/serial_led_state.png) · [vista superior](evidence/hardware_photo_top.jpg) · [vista lateral](evidence/hardware_photo_side.jpg)
 
-## Referencias
-
-- MicroPython · `machine.ADC` documentation
-- Raspberry Pi Pico 2 W datasheet · ADC pins
-- Wokwi · Raspberry Pi Pico + MicroPython
-- Laboratorio de Elementos Programables I · Sesión 07
