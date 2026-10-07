@@ -2,10 +2,7 @@
 ### CHALLENGE 07 · Smart Analog Monitor
 
 **Laboratorio de Elementos Programables I**
-**Alumno:** Jonathan Hernández Lazcano
-**Placa:** Raspberry Pi Pico 2 W · MicroPython
-**Herramientas:** Wokwi (simulación) + montaje físico en protoboard
-
+**Alumno:** Jonathan Hernández Lazcano - Camila Rodriguez Rosas
 ---
 
 ## 1. Objetivo
