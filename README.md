@@ -4,6 +4,8 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 
 **Autor:** Jonathan Hernández Lazcano — 200417
 
+> Las Sesiones 07 y 08 se realizaron en equipo con Camila Rodriguez Rosas.
+
 ## Contenido
 
 | Sesión | Tema | Entregables |
@@ -12,6 +14,8 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 | [Sesión 03](Sesion_03_GPIO_Pullup_Pulldown/) | GPIO con pull-up / pull-down | Código MicroPython, simulación Wokwi, armado físico, video |
 | [Sesión 04](Sesion_04_Interrupciones_Temporizadores_FINAL_SIMULABLE/) | Interrupciones y temporizadores | Código MicroPython, diagrama Wokwi, armado físico, evidencia, video |
 | [Sesión 06](Sesion_06_PWM_Motor_DC/) | PWM + puente H L298N + motor DC | Código MicroPython (modo auto y manual), simulación Wokwi, armado físico, videos |
+| [Sesión 07](Sesion_07_ADC_Signal_Conditioning/) | ADC y acondicionamiento de señal (Smart Analog Monitor) | Código MicroPython, simulación Wokwi, armado físico, evidencia, videos |
+| [Sesión 08](Sesion_08_Dual_Core_Multitarea/) | Multitarea cooperativa y dual core | Código MicroPython, simulación Wokwi, armado físico, video |
 
 ## Descripción de las sesiones
 
@@ -64,12 +68,41 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 | Botones FORWARD / REVERSE / STOP | 14 / 15 / 16 (`PULL_UP`) |
 | Potenciómetro | 26 (ADC0) |
 
+### Sesión 07 — Conversión ADC y acondicionamiento de señal
+*Smart Analog Monitor*: lectura de una señal analógica con `read_u16()` (0–65535), conversión a voltaje y porcentaje, **filtro de promedio móvil** para eliminar ruido y clasificación en tres estados (**NORMAL / WARNING / ALARM**) mostrados con LEDs y por serial. El sensor activo (potenciómetro en GP26 o LDR con divisor de voltaje en GP27) se elige en el código.
+
+- [`main.py`](Sesion_07_ADC_Signal_Conditioning/main.py) — programa principal
+- [`wokwi/`](Sesion_07_ADC_Signal_Conditioning/wokwi/) — circuito y enlace de la simulación
+- [`evidence/`](Sesion_07_ADC_Signal_Conditioning/evidence/) — lecturas seriales y fotos del montaje
+- Detalles completos en el [README de la sesión](Sesion_07_ADC_Signal_Conditioning/README.md)
+
+| Elemento | Pin GPIO |
+|----------|----------|
+| Potenciómetro | 26 (ADC0) |
+| LDR + 10 kΩ (divisor) | 27 (ADC1) |
+| LED verde / amarillo / rojo | 13 / 14 / 15 |
+
+### Sesión 08 — Multitarea cooperativa y dual core
+*Challenge 08*: monitor analógico con **planificador cooperativo** en un solo núcleo (sin `_thread`) basado en `ticks_ms`. Cuatro tareas periódicas: sensor (2 ms, promedio móvil de 32 muestras con **auto-calibración** del rango del potenciómetro), botón (10 ms, antirrebote; pulsación corta = ACK, larga = RESET), UI de LEDs (200 ms) y log serial (1 s). `STRESS_BLOCK_MS` permite una prueba de estrés para comparar contra una versión dual-core.
+
+- [`main.py`](Sesion_08_Dual_Core_Multitarea/main.py) — programa principal
+- [`wokwi/diagram.json`](Sesion_08_Dual_Core_Multitarea/wokwi/diagram.json) — circuito para Wokwi ([proyecto en línea](https://wokwi.com/projects/477453120162961409))
+- [`evidence/`](Sesion_08_Dual_Core_Multitarea/evidence/) — foto del armado físico
+- [Video del armado](https://youtube.com/shorts/y9N-Xi04YrA?feature=share)
+- Detalles completos en el [README de la sesión](Sesion_08_Dual_Core_Multitarea/README.md)
+
+| Elemento | Pin GPIO |
+|----------|----------|
+| Potenciómetro | 26 (ADC0) |
+| LED verde / amarillo / rojo / azul (heartbeat) | 16 / 17 / 18 / 19 |
+| Botón (ACK / RESET) | 20 (`PULL_UP`) |
+
 ## Hardware y herramientas
 
-- **Placa:** Raspberry Pi Pico (RP2040)
+- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08
 - **Firmware:** MicroPython v1.28.0
 - **Simulador:** [Wokwi](https://wokwi.com/)
-- **Componentes:** LEDs, resistencias de 330 Ω, botones pulsadores, potenciómetro, puente H L298N y motor DC
+- **Componentes:** LEDs, resistencias (220 Ω / 330 Ω), botones pulsadores, potenciómetro, LDR, puente H L298N y motor DC
 
 
 ## Estructura del repositorio
@@ -86,12 +119,20 @@ Lab-Elem-Program/
 ├── Sesion_04_Interrupciones_Temporizadores_FINAL_SIMULABLE/
 │   ├── Evidencia/
 │   └── Wokwi_Micropython/
-└── Sesion_06_PWM_Motor_DC/
-    ├── PWM_AUTO.py
-    ├── PWM_MANUAL.PY
+├── Sesion_06_PWM_Motor_DC/
+│   ├── PWM_AUTO.py
+│   ├── PWM_MANUAL.PY
+│   ├── evidence/
+│   └── wokwi/
+├── Sesion_07_ADC_Signal_Conditioning/
+│   ├── main.py
+│   ├── evidence/
+│   └── wokwi/
+└── Sesion_08_Dual_Core_Multitarea/
+    ├── main.py
     ├── evidence/
     └── wokwi/
 ```
 
-Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04 y 06 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones.
+Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07 y 08 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones.
 
