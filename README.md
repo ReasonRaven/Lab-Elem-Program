@@ -4,7 +4,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 
 **Autor:** Jonathan Hernández Lazcano — 200417
 
-> Las Sesiones 07 y 08 se realizaron en equipo con Camila Rodriguez Rosas.
+> Las Sesiones 07, 08 y 09 se realizaron en equipo con Camila Rodriguez Rosas.
 
 ## Contenido
 
@@ -16,6 +16,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 | [Sesión 06](Sesion_06_PWM_Motor_DC/) | PWM + puente H L298N + motor DC | Código MicroPython (modo auto y manual), simulación Wokwi, armado físico, videos |
 | [Sesión 07](Sesion_07_ADC_Signal_Conditioning/) | ADC y acondicionamiento de señal (Smart Analog Monitor) | Código MicroPython, simulación Wokwi, armado físico, evidencia, videos |
 | [Sesión 08](Sesion_08_Dual_Core_Multitarea/) | Multitarea cooperativa y dual core | Código MicroPython, simulación Wokwi, armado físico, video |
+| [Sesión 09](Sesion_09_Comunicacion_UART/) | Comunicación UART (UART Command Center) | Código MicroPython, tabla de pruebas, exit ticket, armado físico, video |
 
 ## Descripción de las sesiones
 
@@ -97,9 +98,23 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 | LED verde / amarillo / rojo / azul (heartbeat) | 16 / 17 / 18 / 19 |
 | Botón (ACK / RESET) | 20 (`PULL_UP`) |
 
+### Sesión 09 — Comunicación UART
+*Challenge 09 · UART Command Center*: el operador escribe comandos en la terminal (USB/REPL), el programa los transmite por el **UART0 físico** (9600 baud, 8N1) y los recibe de vuelta mediante un **jumper de loopback GP0 (TX) → GP1 (RX)**. Un parser interpreta la trama `COMANDO,ARG1,ARG2\n`, controla dos LEDs y responde siempre con `ACK`, `ERR` o `STATUS`. Soporta `PING`, `SET`, `GET,STATUS`, `TOGGLE`, `BLINK` (con `Timer`, no bloqueante) y `HELP`, con validación de campos, dispositivo y valor. Las 8 pruebas de la tabla resultaron PASS.
+
+- [`main.py`](Sesion_09_Comunicacion_UART/main.py) — programa principal
+- [`tabla_pruebas.csv`](Sesion_09_Comunicacion_UART/tabla_pruebas.csv) — tabla de pruebas (8/8 PASS)
+- [`evidencia/`](Sesion_09_Comunicacion_UART/evidencia/) — foto del armado físico y captura de la terminal
+- [Video de la prueba física](https://youtube.com/shorts/psTezm2v7y4)
+- Detalles completos en el [README de la sesión](Sesion_09_Comunicacion_UART/README.md)
+
+| Elemento | Pin GPIO |
+|----------|----------|
+| UART0 TX → RX (jumper loopback) | 0 → 1 |
+| LED1 / LED2 | 13 / 14 |
+
 ## Hardware y herramientas
 
-- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08
+- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08 y Pico 2 W (RP2350) en la Sesión 09
 - **Firmware:** MicroPython v1.28.0
 - **Simulador:** [Wokwi](https://wokwi.com/)
 - **Componentes:** LEDs, resistencias (220 Ω / 330 Ω), botones pulsadores, potenciómetro, LDR, puente H L298N y motor DC
@@ -128,11 +143,15 @@ Lab-Elem-Program/
 │   ├── main.py
 │   ├── evidence/
 │   └── wokwi/
-└── Sesion_08_Dual_Core_Multitarea/
+├── Sesion_08_Dual_Core_Multitarea/
+│   ├── main.py
+│   ├── evidence/
+│   └── wokwi/
+└── Sesion_09_Comunicacion_UART/
     ├── main.py
-    ├── evidence/
-    └── wokwi/
+    ├── tabla_pruebas.csv
+    └── evidencia/
 ```
 
-Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07 y 08 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones.
+Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07, 08 y 09 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones.
 
