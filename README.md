@@ -4,7 +4,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 
 **Autor:** Jonathan Hernández Lazcano — 200417
 
-> Las Sesiones 07, 08 y 09 se realizaron en equipo con Camila Rodriguez Rosas.
+> Las Sesiones 07, 08 y 09 se realizaron en equipo con Camila Rodriguez Rosas. El Examen Práctico 02 se realizó con Camila Rodriguez Rosas y Hamid Susen Santiago Garcia.
 
 ## Contenido
 
@@ -17,6 +17,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 | [Sesión 07](Sesion_07_ADC_Signal_Conditioning/) | ADC y acondicionamiento de señal (Smart Analog Monitor) | Código MicroPython, simulación Wokwi, armado físico, evidencia, videos |
 | [Sesión 08](Sesion_08_Dual_Core_Multitarea/) | Multitarea cooperativa y dual core | Código MicroPython, simulación Wokwi, armado físico, video |
 | [Sesión 09](Sesion_09_Comunicacion_UART/) | Comunicación UART (UART Command Center) | Código MicroPython, tabla de pruebas, exit ticket, armado físico, video |
+| [Examen 02](Examen2/) | UART + PWM + ADC + Dual-Core (Sistema de Control Serial Inteligente) | Código MicroPython, diagrama Wokwi, armado físico, captura de terminal |
 
 ## Descripción de las sesiones
 
@@ -112,9 +113,25 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 | UART0 TX → RX (jumper loopback) | 0 → 1 |
 | LED1 / LED2 | 13 / 14 |
 
+### Examen Práctico 02 — UART + PWM + ADC + Dual-Core
+*Sistema de Control Serial Inteligente*: **Core 0** recibe comandos por la terminal serial, controla un LED digital y un LED con **PWM a 1 kHz** (`duty_u16`) y responde con `ACK`, `ERR` o `STATUS`. **Core 1** lee el potenciómetro por ADC cada 50 ms (promedio de 8 lecturas), lo convierte a porcentaje, incrementa `SAMPLES` y lee el botón con antirrebote, generando `EVENT,BTN_PRESSED`. Ambos núcleos comparten el estado protegido con un `lock`. Soporta `PING`, `LED`, `PWM`, `STATUS` y `ALL`, más `TOGGLE` y `HELP` como bonus, y detecta `ERR,PWM_RANGE`, `ERR,BAD_VALUE`, `ERR,BAD_FORMAT` y `ERR,UNKNOWN_COMMAND` sin detenerse.
+
+- [`main.py`](Examen2/main.py) — programa principal
+- [`diagram.json`](Examen2/diagram.json) — circuito para Wokwi
+- [`Evidencia_Fisica/`](Examen2/Evidencia_Fisica/) — fotos del armado físico y captura de la terminal
+- [Enunciado del examen (PDF)](Examen2/Examen_Practico_02_UART_PWM_ADC_DualCore_v2.pdf)
+- Detalles completos en el [README del examen](Examen2/README.md)
+
+| Elemento | Pin GPIO |
+|----------|----------|
+| LED digital | 13 |
+| LED PWM | 15 |
+| Botón | 16 (`PULL_UP`) |
+| Potenciómetro | 26 (ADC0) |
+
 ## Hardware y herramientas
 
-- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08 y Pico 2 W (RP2350) en la Sesión 09
+- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08 y Pico 2 W (RP2350) en la Sesión 09; Pico 2 en el Examen 02
 - **Firmware:** MicroPython v1.28.0
 - **Simulador:** [Wokwi](https://wokwi.com/)
 - **Componentes:** LEDs, resistencias (220 Ω / 330 Ω), botones pulsadores, potenciómetro, LDR, puente H L298N y motor DC
@@ -126,6 +143,10 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 Lab-Elem-Program/
 ├── LICENSE
 ├── README.md
+├── Examen2/
+│   ├── main.py
+│   ├── diagram.json
+│   └── Evidencia_Fisica/
 ├── Sesion_02_Conceptos_Basicos_MCU/
 │   └── infographic/
 ├── Sesion_03_GPIO_Pullup_Pulldown/
@@ -153,5 +174,5 @@ Lab-Elem-Program/
     └── evidencia/
 ```
 
-Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07, 08 y 09 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones.
+Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07, 08 y 09 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones. El Examen 02 también tiene su propio `README.md` con integrantes, pines, comandos y evidencia.
 
