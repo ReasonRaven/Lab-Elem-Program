@@ -51,19 +51,6 @@ devices = i2c.scan()
 | Alimentación OLED | 3V3 y GND |
 | Dirección OLED | **0x3C** (decimal **60**) |
 
-### Resultado del scan
-
-```
-Decimal: [60]
-Hex: ['0x3c']
-OLED detectado en 0x3c
-```
-
-`i2c.scan()` devuelve la lista de direcciones en **decimal**; por eso se imprime también convertida a **hex**, que es como vienen en las hojas de datos. El programa busca el OLED en las dos direcciones típicas del SSD1306 (`0x3C` y `0x3D`) y, si no lo encuentra, sigue funcionando (LED y muestreo) e indica qué revisar.
-
-![Scan I2C](evidence/scan.png)
-
----
 
 ## 4. Circuito
 
@@ -128,7 +115,7 @@ La lectura, la clasificación y el LED se ejecutan en **cada vuelta** del bucle 
 
 ## 7. Evidencia
 
-- Capturas de la simulación en **Wokwi**: [`scan.png`](evidence/scan.png), [`live.png`](evidence/live.png), [`i2c.png`](evidence/i2c.png), [`stats.png`](evidence/stats.png)
+- Capturas de la simulación en **Wokwi**:
 - 🎥 **Video del funcionamiento físico:** [YouTube Short](https://youtube.com/shorts/cm7nNhgD_3A?feature=share)
 - Fotos del circuito físico con OLED (Raspberry Pi Pico 2 W):
 
