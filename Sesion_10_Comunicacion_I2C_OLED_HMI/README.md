@@ -75,7 +75,7 @@ OLED detectado en 0x3c
 | Botón | GP16 → GND | `PULL_UP` interno: presionado = 0 |
 | LED ALARM | GP15 → 330 Ω → LED → GND | |
 
-El circuito completo está en [`diagram.json`](diagram.json) (Wokwi).
+El circuito completo está en [`diagram.json`](diagram.json) ([proyecto en Wokwi](https://wokwi.com/projects/479354667469490177)).
 
 ---
 
