@@ -78,10 +78,6 @@ El botón cambia de página en ciclo **1 → 2 → 3 → 1**. Se detecta el **fl
 
 Cada refresco sigue el mismo patrón: `oled.fill(0)` (borrar) → dibujar la página → `oled.show()` (enviar al display).
 
-| LIVE | I2C | STATS |
-|---|---|---|
-| ![Live](evidence/live.png) | ![I2C](evidence/i2c.png) | ![Stats](evidence/stats.png) |
-
 ---
 
 ## 6. Lógica de ALARM
