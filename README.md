@@ -4,7 +4,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 
 **Autor:** Jonathan Hernández Lazcano — 200417
 
-> Las Sesiones 07, 08, 09 y 10 se realizaron en equipo con Camila Rodriguez Rosas. El Examen Práctico 02 se realizó con Camila Rodriguez Rosas y Hamid Susen Santiago Garcia.
+> Las Sesiones 07, 08, 09, 10 y 11 se realizaron en equipo con Camila Rodriguez Rosas. El Examen Práctico 02 se realizó con Camila Rodriguez Rosas y Hamid Susen Santiago Garcia.
 
 ## Contenido
 
@@ -18,6 +18,7 @@ Repositorio de tareas, prácticas y evidencias del laboratorio de **Elementos Pr
 | [Sesión 08](Sesion_08_Dual_Core_Multitarea/) | Multitarea cooperativa y dual core | Código MicroPython, simulación Wokwi, armado físico, video |
 | [Sesión 09](Sesion_09_Comunicacion_UART/) | Comunicación UART (UART Command Center) | Código MicroPython, tabla de pruebas, exit ticket, armado físico, video |
 | [Sesión 10](Sesion_10_Comunicacion_I2C_OLED_HMI/) | Comunicación I2C + OLED HMI (Smart I2C HMI Monitor) | Código MicroPython, driver SSD1306, diagrama Wokwi, armado físico, exit ticket, video |
+| [Sesión 11](Sesion_11_WiFi_HTTP_Sockets_HMI/) | Wi-Fi + HTTP + Sockets + HMI (Smart Wi-Fi HMI) | Código MicroPython, servidor web con dashboard y API, diagrama Wokwi, armado físico, captura del dashboard, video |
 | [Examen 02](Examen2/) | UART + PWM + ADC + Dual-Core (Sistema de Control Serial Inteligente) | Código MicroPython, diagrama Wokwi, armado físico, captura de terminal |
 
 ## Descripción de las sesiones
@@ -131,6 +132,21 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 | LED de ALARM | 15 |
 | Botón (cambio de página) | 16 (`PULL_UP`) |
 
+### Sesión 11 — Wi-Fi + HTTP + Sockets + HMI
+*DO11 · Smart Wi-Fi HMI*: la **Pico 2 W** se conecta a la red en **modo STA** (2.4 GHz, timeout de 20 s) y levanta un **servidor HTTP con sockets** en el puerto 80 que sirve un **dashboard web**. Desde el navegador, un slider y botones rápidos (OFF/25/50/75/100 %) regulan el brillo de un LED por **PWM a 1 kHz** y un botón TOGGLE conmuta un segundo LED; el estado (IP, PWM, LED 2 y número de requests) se actualiza cada 5 s mediante `fetch` a `/api/status` y también se muestra en una **OLED SSD1306** por I2C. La API (`/api/status`, `/api/pwm?value=N`, `/api/led2/toggle`, `/pwm/N`) responde en JSON y el servidor nunca se detiene ante peticiones inválidas: devuelve `400` (valor fuera de 0–100 o mal formado), `404` (ruta inexistente) o `405` (método distinto de GET). Las credenciales Wi-Fi se cargan desde un módulo local que no se sube al repositorio, y si la OLED no se detecta el servidor sigue funcionando.
+
+- [`main.py`](Sesion_11_WiFi_HTTP_Sockets_HMI/main.py) — servidor HTTP, API, dashboard y control de hardware
+- [`diagram.json`](Sesion_11_WiFi_HTTP_Sockets_HMI/diagram.json) — circuito para Wokwi
+- [`evidence/`](Sesion_11_WiFi_HTTP_Sockets_HMI/evidence/) — foto del armado físico y captura del dashboard web
+- [Video de la práctica](https://youtube.com/shorts/XpxjB4pjCMs?feature=share)
+- Detalles completos en el [README de la sesión](Sesion_11_WiFi_HTTP_Sockets_HMI/README.md)
+
+| Elemento | Pin GPIO |
+|----------|----------|
+| LED 1 (PWM) | 15 |
+| LED 2 (ON/OFF) | 14 |
+| OLED SDA / SCL (I2C0) | 4 / 5 |
+
 ### Examen Práctico 02 — UART + PWM + ADC + Dual-Core
 *Sistema de Control Serial Inteligente*: **Core 0** recibe comandos por la terminal serial, controla un LED digital y un LED con **PWM a 1 kHz** (`duty_u16`) y responde con `ACK`, `ERR` o `STATUS`. **Core 1** lee el potenciómetro por ADC cada 50 ms (promedio de 8 lecturas), lo convierte a porcentaje, incrementa `SAMPLES` y lee el botón con antirrebote, generando `EVENT,BTN_PRESSED`. Ambos núcleos comparten el estado protegido con un `lock`. Soporta `PING`, `LED`, `PWM`, `STATUS` y `ALL`, más `TOGGLE` y `HELP` como bonus, y detecta `ERR,PWM_RANGE`, `ERR,BAD_VALUE`, `ERR,BAD_FORMAT` y `ERR,UNKNOWN_COMMAND` sin detenerse.
 
@@ -149,10 +165,10 @@ Juego de reflejos: tras un retardo aleatorio (1–10 s) generado con un `Timer` 
 
 ## Hardware y herramientas
 
-- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08 y Pico 2 W (RP2350) en las Sesiones 09 y 10; Pico 2 en el Examen 02
+- **Placa:** Raspberry Pi Pico (RP2040); Pico W en el montaje físico de la Sesión 08 y Pico 2 W (RP2350) en las Sesiones 09, 10 y 11; Pico 2 en el Examen 02
 - **Firmware:** MicroPython v1.28.0
 - **Simulador:** [Wokwi](https://wokwi.com/)
-- **Componentes:** LEDs, resistencias (220 Ω / 330 Ω), botones pulsadores, potenciómetro, LDR, puente H L298N, motor DC y pantalla OLED SSD1306 (I2C)
+- **Componentes:** LEDs, resistencias (220 Ω / 330 Ω), botones pulsadores, potenciómetro, LDR, puente H L298N, motor DC y pantalla OLED SSD1306 (I2C); Wi-Fi integrado (CYW43439) de la Pico 2 W en la Sesión 11
 
 
 ## Estructura del repositorio
@@ -190,12 +206,16 @@ Lab-Elem-Program/
 │   ├── main.py
 │   ├── tabla_pruebas.csv
 │   └── evidencia/
-└── Sesion_10_Comunicacion_I2C_OLED_HMI/
+├── Sesion_10_Comunicacion_I2C_OLED_HMI/
+│   ├── main.py
+│   ├── ssd1306.py
+│   ├── diagram.json
+│   └── evidence/
+└── Sesion_11_WiFi_HTTP_Sockets_HMI/
     ├── main.py
-    ├── ssd1306.py
     ├── diagram.json
     └── evidence/
 ```
 
-Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07, 08, 09 y 10 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones. El Examen 02 también tiene su propio `README.md` con integrantes, pines, comandos y evidencia.
+Cada sesión incluye además su propio `README.md`; los de las Sesiones 03, 04, 06, 07, 08, 09, 10 y 11 detallan objetivo, tabla de pines, funcionamiento, pruebas y conclusiones. El Examen 02 también tiene su propio `README.md` con integrantes, pines, comandos y evidencia.
 
