@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "author": "DO11 Smart Wi-Fi HMI",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-pi-pico-2w", "id": "pico", "top": 0, "left": 0, "attrs": {} },
+    { "type": "board-ssd1306", "id": "oled1", "top": -105, "left": -230, "attrs": { "i2cAddress": "0x3c" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 170, "left": -150, "rotate": 0, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led1", "top": 120, "left": -220, "attrs": { "color": "red", "label": "PWM GP15" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 120, "left": -150, "rotate": 0, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "led2", "top": 70, "left": -220, "attrs": { "color": "green", "label": "LED2 GP14" } }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+
+    [ "pico:GP15", "r1:2", "orange", [] ],
+    [ "r1:1", "led1:A", "orange", [] ],
+    [ "led1:C", "pico:GND.4", "black", [] ],
+
+    [ "pico:GP14", "r2:2", "green", [] ],
+    [ "r2:1", "led2:A", "green", [] ],
+    [ "led2:C", "pico:GND.4", "black", [] ],
+
+    [ "oled1:SDA", "pico:GP4", "blue", [] ],
+    [ "oled1:SCL", "pico:GP5", "gold", [] ],
+    [ "oled1:VCC", "pico:3V3", "red", [] ],
+    [ "oled1:GND", "pico:GND.2", "black", [] ]
+  ],
+  "dependencies": {}
+}
