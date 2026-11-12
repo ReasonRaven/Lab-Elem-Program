@@ -3,6 +3,7 @@
 
 **Laboratorio de Elementos Programables I**
 **Alumno:** Jonathan Hernández Lazcano — 200417
+**Alumno:** Camila Rodriguez Rosas — 194100
 
 ---
 
